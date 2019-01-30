@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: False
+  vars:
+    pkg1: httpd
+    #pkgs2: nfs
+  vars_files:
+    - "vars_definition.yml"
+  vars_prompt:
+   - name: testname
+     prompt: "Enter your testname"
+  tasks:
+    - name: install all pkgs
+      yum:
+        name: "{{pkg1}}"
+        state: present
+      notify: restart httpd
+  handlers:
+    - name: restart httpd
+      action: service name=httpd state=restarted

@@ -1,0 +1,12 @@
+---
+- hosts: local
+  become: yes
+  tasks:
+    - name: find out service status of httpd
+      shell: systemctl status httpd
+      register: status_httpd
+      until: status_httpd.stdout.find("running") != -1
+      retries: 5
+    - debug: 
+        msg: status_httpd
+      

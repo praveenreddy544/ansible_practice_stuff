@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become_user: root
+  become: yes
+  tasks:
+    - name: install tree pkg
+      yum: name=tree state=installed

@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+   - name: execute uptime on remote servers
+     shell: uptime
+     register: uptime_output_Var
+   - debug:
+      var: uptime_output_Var

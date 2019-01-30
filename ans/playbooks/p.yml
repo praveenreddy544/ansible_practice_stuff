@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars_prompt:
+    - name: name of pkg?
+      prompt: enter pkg
+  tasks:
+    - name: install telenet
+      yum: name=telnet state=installed

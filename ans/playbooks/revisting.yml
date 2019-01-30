@@ -1,0 +1,16 @@
+- hosts: local
+  gather_facts: False
+  tasks:
+   - name: install tree pkg
+     yum:
+       name: httpd
+       state: present
+     notify: Restart httpd
+   - name: check status of httpd
+     command: systemctl status httpd
+     register: result
+   - debug: var=result
+  handlers:
+      - name: Restart httpd
+        service: name=httpd state=restarted
+     

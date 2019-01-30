@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become_user: root
+  become: yes
+  gather_facts: no
+  #vars:
+   # pkgname: tree
+  vars_files:
+  - /home/chintu/ans/playbooks/vars_files/vars1.yml
+  vars_prompt:
+    - name: "age_value"
+      prompt: "what is your age"
+  tasks:
+    - name: install tree pkg
+      yum: name={{ pkg_name }} state=installed
+    - name: install httpd pkg
+      yum: name={{ second_pkg_name }} state=installed
+      notify: restart httpd
+    - debug: 
+        msg: "Package name is ----> {{ pkg_name }} and name is ---> {{ prin }} and {{ age_value }}"
+    - name: capture result of httpd
+      command: systemctl status httpd
+      register: status_of_httpd
+    - debug: 
+       var: status_of_httpd
+  handlers:
+    - name: restart httpd
+      service: name={{ second_pkg_name }} state=restarted

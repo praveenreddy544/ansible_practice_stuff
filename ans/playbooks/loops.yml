@@ -1,0 +1,13 @@
+---
+- hosts: local
+  become_user: root
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: install below pkgs
+      yum: 
+        name: "{{ item }}"
+        state: installed
+      with_items:
+        - tree
+        - httpd

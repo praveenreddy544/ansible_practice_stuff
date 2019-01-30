@@ -1,0 +1,12 @@
+---
+- hosts: local
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: install below list of pkgs
+      yum: name={{ item }} state=removed
+      with_items:
+        - tree
+        - lynx
+      tags:
+       - give

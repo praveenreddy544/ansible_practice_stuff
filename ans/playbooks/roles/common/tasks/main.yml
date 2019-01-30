@@ -1,0 +1,10 @@
+- name: install telent pkg
+  yum: name=telnet state=installed
+- name: install tree pkg
+  yum: name=tree state=installed
+- name: import first.yml task
+  import_tasks: first.yml 
+- name: import second.yml task
+  import_tasks: second.yml
+- debug: 
+    msg: name is {{ firstname }} and lastname is {{ lastname }} with id is {{ id }} and college is ---> {{ college }}

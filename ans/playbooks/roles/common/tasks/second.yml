@@ -1,0 +1,2 @@
+- name: install lynx
+  yum: name=lynx state=installed

@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: capture status of httpd
+     command: service httpd status
+     when: ansible_distribution_version == "6.7"
+     register: service_status
+   - name: capture in debug
+     debug: var=service_status
+
+   - name: capture status of httpd in rhel7
+     command: systemctl status httpd
+     when: ansible_distribution_version == "7.6.1810"
+     register: s_status
+   - name: capturing debug
+     debug: var=s_status

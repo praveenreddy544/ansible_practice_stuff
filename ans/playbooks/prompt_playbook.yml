@@ -1,0 +1,10 @@
+---
+- hosts: all
+  vars_prompt:
+    - name: pn
+      prompt: enter your pkg
+      private: yes
+      default: telnet
+  tasks:
+    - name: install pkg
+      yum: name= {{ pn }} state=installed
