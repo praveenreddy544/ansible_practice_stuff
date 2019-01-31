@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  vars:
+    firstname : "praveen"
+    lastname: "poreddy"
+    location: "webster"
+  tasks:
+    - name: copy template to remote servers
+      template:
+         src: "first_template.j2"
+         dest: "/home/chintu/chintu.conf"
+         owner: chintu
+         group: chintu
+         mode: 0777
+      notify: restart httpd
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted
